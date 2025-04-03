@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Paracetamol",
+    "price": 20,
+    "category": "Fever"
+  },
+  {
+    "id": 2,
+    "name": "Crocin",
+    "price": 25,
+    "category": "Fever"
+  },
+  {
+    "id": 3,
+    "name": "Dolo 650",
+    "price": 30,
+    "category": "Painkiller"
+  },
+  {
+    "id": 4,
+    "name": "Benadryl",
+    "price": 40,
+    "category": "Cold & Cough"
+  }
+]

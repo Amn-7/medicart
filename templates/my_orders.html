@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Orders - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      .orders-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background-color: #fffdfd;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+      }
+
+      h2 {
+        text-align: center;
+        color: #ff007a;
+        margin-bottom: 25px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 15px;
+      }
+
+      th {
+        background-color: #ffe6f0;
+        color: #333;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fdf6f9;
+      }
+
+      tr:hover {
+        background-color: #fff0f6;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 16px;
+      }
+
+      /* Reuse header styling */
+      header {
+        background-color: #ff007a;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-section h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .logo-section p {
+        font-size: 13px;
+        color: #ffe4f1;
+      }
+
+      nav a,
+      nav span {
+        color: white;
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+        color: #ffd1ea;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+          width="120"
+        />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        <span>👋 {{ session['user'] }}</span>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </nav>
+    </header>
+
+    <!-- Orders Section -->
+    <div class="orders-container">
+      <h2>📦 My Orders</h2>
+
+      {% if orders %}
+      <table>
+        <tr>
+          <th>Items</th>
+          <th>Total (₹)</th>
+          <th>Ordered On</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order[0] }}</td>
+          <td>₹{{ order[1] }}</td>
+          <td>{{ order[2] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p>You have not placed any orders yet.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

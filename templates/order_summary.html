@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Summary - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      .summary-container {
+        max-width: 700px;
+        margin: 40px auto;
+        background-color: #fffdfd;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+      }
+
+      h2 {
+        text-align: center;
+        color: #ff007a;
+        margin-bottom: 30px;
+      }
+
+      .summary-box {
+        background-color: #fff1f7;
+        padding: 20px;
+        border-left: 5px solid #ff007a;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
+
+      .summary-box p {
+        margin-bottom: 12px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .button-row {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .button-row a button {
+        margin: 8px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background-color: #ff007a;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .button-row a button:hover {
+        background-color: #e6006b;
+      }
+
+      p {
+        text-align: center;
+        font-size: 16px;
+        color: #555;
+      }
+
+      /* Header styling to match global layout */
+      header {
+        background-color: #ff007a;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-section h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .logo-section p {
+        font-size: 13px;
+        color: #ffe4f1;
+      }
+
+      nav a {
+        color: white;
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+        color: #ffd1ea;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+          width="120"
+        />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if session.get('user') %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <!-- Order Summary Section -->
+    <div class="summary-container">
+      <h2>🧾 Order Summary</h2>
+
+      {% if order %}
+      <div class="summary-box">
+        <p><strong>Items Ordered:</strong> {{ order[0] }}</p>
+        <p><strong>Total Paid:</strong> ₹{{ order[1] }}</p>
+        <p><strong>Delivery Address:</strong> {{ address }}</p>
+        <p><strong>Order Date:</strong> {{ order[2] }}</p>
+      </div>
+
+      <div class="button-row">
+        <a href="{{ url_for('invoice') }}"
+          ><button>🧾 Download Invoice</button></a
+        >
+        <a href="{{ url_for('home') }}"><button>⬅ Back to Home</button></a>
+      </div>
+      {% else %}
+      <p>No recent orders found.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

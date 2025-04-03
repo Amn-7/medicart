@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      body {
+        background-color: #fff1f7;
+        font-family: "Segoe UI", sans-serif;
+        padding: 30px;
+      }
+
+      .invoice-container {
+        max-width: 700px;
+        margin: auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .invoice-container h2 {
+        color: #ff007a;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .invoice-details {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .invoice-details p {
+        margin-bottom: 10px;
+      }
+
+      .header-print {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .header-print img {
+        width: 90px;
+      }
+
+      .brand-info h1 {
+        margin: 0;
+        font-size: 26px;
+        color: #ff007a;
+      }
+
+      .brand-info p {
+        margin: 2px 0;
+        font-size: 13px;
+        color: #666;
+      }
+
+      .print-btn {
+        margin-top: 30px;
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #ff007a;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .print-btn:hover {
+        background-color: #e6006b;
+      }
+
+      nav {
+        text-align: right;
+        margin-bottom: 20px;
+      }
+
+      nav a {
+        margin-left: 15px;
+        text-decoration: none;
+        color: #ff007a;
+        font-weight: bold;
+      }
+
+      @media print {
+        .print-btn,
+        nav {
+          display: none;
+        }
+
+        .invoice-container {
+          box-shadow: none;
+          border: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Branding Header -->
+    <header>
+      <div class="header-print">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+        />
+        <div class="brand-info">
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if session.get('user') %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <!-- Invoice Content -->
+    <div class="invoice-container">
+      <h2>🧾 Invoice</h2>
+
+      <div class="invoice-details">
+        {% if order %}
+        <p><strong>User:</strong> {{ user }}</p>
+        <p><strong>Items Ordered:</strong> {{ order[0] }}</p>
+        <p><strong>Total Paid:</strong> ₹{{ order[1] }}</p>
+        <p><strong>Delivery Address:</strong> {{ address }}</p>
+        <p><strong>Date:</strong> {{ order[2] }}</p>
+        {% else %}
+        <p>No order found.</p>
+        {% endif %}
+      </div>
+
+      <button class="print-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+      </button>
+    </div>
+  </body>
+</html>

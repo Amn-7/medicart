@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      body {
+        background-color: #fff1f7;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .login-box {
+        max-width: 400px;
+        margin: 60px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      .login-box h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ff007a;
+      }
+
+      .login-box label {
+        display: block;
+        margin: 12px 0 5px;
+        font-weight: 500;
+      }
+
+      .login-box input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+      }
+
+      .login-box button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background-color: #ff007a;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .login-box button:hover {
+        background-color: #e6006b;
+      }
+
+      .login-box p {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+      }
+
+      nav {
+        text-align: right;
+        margin-right: 30px;
+      }
+
+      header {
+        background-color: #ff007a;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-section h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .logo-section p {
+        font-size: 13px;
+        color: #ffe4f1;
+      }
+
+      nav a {
+        color: white;
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+        color: #ffd1ea;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+          width="120"
+        />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        <a href="{{ url_for('signup') }}">Signup</a>
+      </nav>
+    </header>
+
+    <!-- Login Box -->
+    <div class="login-box">
+      <h2>🔐 Login</h2>
+
+      <form method="post">
+        <label for="email">📧 Email:</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="password">🔑 Password:</label>
+        <input type="password" name="password" id="password" required />
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+</html>

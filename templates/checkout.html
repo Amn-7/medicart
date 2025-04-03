@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Placed - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      .confirmation-box {
+        max-width: 700px;
+        margin: 30px auto;
+        background-color: #fff5f9;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+
+      .confirmation-box h2 {
+        color: #28a745;
+        margin-bottom: 20px;
+      }
+
+      .confirmation-box p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      .tracking-box {
+        background-color: #fff1f7;
+        padding: 20px;
+        border-left: 5px solid #ff007a;
+        margin: 30px auto 0;
+        border-radius: 8px;
+        max-width: 700px;
+      }
+
+      .tracking-step {
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .active {
+        color: #ff007a;
+      }
+
+      .countdown {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff007a;
+        margin-top: 10px;
+      }
+
+      .action-buttons {
+        text-align: center;
+        margin-top: 25px;
+      }
+
+      .action-buttons a {
+        margin: 5px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+          width="120"
+        />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        {% if session.get('user') %}
+        <span>👋 {{ session['user'] }}</span>
+        <a href="{{ url_for('my_orders') }}">My Orders</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Signup</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <!-- Order Confirmation -->
+    <div class="confirmation-box">
+      <h2>✅ Order Placed Successfully!</h2>
+      <p><strong>Items:</strong> {{ items }}</p>
+      <p><strong>Total Paid:</strong> ₹{{ total }}</p>
+      <p>
+        <strong>Delivering to:</strong> {{ session.get('address', 'Address not
+        provided') }}
+      </p>
+
+      <div class="action-buttons">
+        <a href="{{ url_for('order_status') }}"
+          ><button>📦 Track Order</button></a
+        >
+        <a href="{{ url_for('order_summary') }}"
+          ><button>🧾 View Order Summary</button></a
+        >
+        <a href="{{ url_for('home') }}"><button>⬅ Back to Home</button></a>
+      </div>
+    </div>
+
+    <!-- Order Tracking -->
+    <div class="tracking-box">
+      <p class="tracking-step active">✅ Order Confirmed</p>
+      <p class="tracking-step active">🏍️ Rider Assigned</p>
+      <p class="tracking-step active">
+        ⏱️ Delivering in <span class="countdown" id="timer">15:00</span>
+      </p>
+    </div>
+
+    <!-- Countdown Timer Script -->
+    <script>
+      let totalSeconds = 15 * 60;
+      const timerEl = document.getElementById("timer");
+
+      function updateTimer() {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        timerEl.textContent = `${minutes.toString().padStart(2, "0")}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          setTimeout(updateTimer, 1000);
+        } else {
+          timerEl.textContent = "Delivered ✅";
+        }
+      }
+
+      updateTimer();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff1f7;
+  padding: 30px;
+  color: #333;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Header Branding */
+header {
+  background-color: #ff007a;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-section img {
+  height: 50px;
+  width: auto;
+}
+
+.logo-section h1 {
+  font-size: 24px;
+}
+
+.logo-section p {
+  font-size: 13px;
+  color: #ffe4f1;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #ffd1ea;
+}
+
+/* Headings */
+h2 {
+  margin-bottom: 20px;
+  color: #ff007a;
+  text-align: center;
+}
+
+/* Medicine List Styling */
+ul {
+  list-style: none;
+  margin-top: 15px;
+}
+
+li {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Animated Action Buttons */
+li a {
+  background-color: #ff007a;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+li a:hover {
+  background-color: #cc0064;
+  transform: scale(1.05);
+}
+
+/* Primary Buttons */
+button {
+  background-color: #ff007a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: #cc0064;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Styling */
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+  margin-top: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Order Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #fff0f5;
+  color: #ff007a;
+}
+
+/* Floating Cart Icon */
+.floating-cart {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #ff007a;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.floating-cart:hover {
+  background-color: #e6006a;
+}
+.toast {
+  background-color: #ff007a;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

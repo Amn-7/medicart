@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Signup - Medicart</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      .signup-box {
+        max-width: 400px;
+        margin: 60px auto;
+        background-color: #fff1f7;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .signup-box h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ff007a;
+      }
+
+      .signup-box label {
+        display: block;
+        margin: 12px 0 5px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .signup-box input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .signup-box button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        background-color: #ff007a;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      .signup-box button:hover {
+        background-color: #e6006b;
+      }
+
+      nav {
+        text-align: right;
+        margin-right: 30px;
+      }
+
+      nav a {
+        color: #ff007a;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      header {
+        background-color: #ff007a;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-section h1 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .logo-section p {
+        font-size: 13px;
+        color: #ffe4f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img
+          src="{{ url_for('static', filename='medicart_logo.png') }}"
+          alt="Medicart Logo"
+          width="120"
+        />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        <a href="{{ url_for('login') }}">Login</a>
+      </nav>
+    </header>
+
+    <!-- Signup Box -->
+    <div class="signup-box">
+      <h2>🔐 Signup</h2>
+      <form method="post">
+        <label for="email">📧 Email:</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="password">🔑 Password:</label>
+        <input type="password" name="password" id="password" required />
+
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+  </body>
+</html>

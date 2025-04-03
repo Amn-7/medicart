@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Cart - Medicart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .cart-container {
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #fff5fa;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .cart-item {
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #fff;
+        border-left: 5px solid #ff007a;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .cart-item span {
+        font-size: 16px;
+      }
+
+      .cart-item a {
+        margin-top: 8px;
+        color: #ff007a;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .cart-item a:hover {
+        text-decoration: underline;
+      }
+
+      .total {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 25px 0 10px;
+        text-align: center;
+        color: #ff007a;
+      }
+
+      .cart-actions {
+        text-align: center;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <img src="{{ url_for('static', filename='medicart_logo.png') }}" alt="Medicart Logo" width="120" />
+        <div>
+          <h1>Medicart</h1>
+          <p>India’s instant health app 💊</p>
+        </div>
+      </div>
+      <nav>
+        {% if session.get('user') %}
+          <span>👋 {{ session['user'] }}</span>
+          <a href="{{ url_for('my_orders') }}">My Orders</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('signup') }}">Signup</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <div class="cart-container">
+      <h2 style="text-align: center;">🛒 Your Cart</h2>
+
+      {% if cart %}
+        {% for med in cart %}
+          <div class="cart-item">
+            <div>
+              <strong>{{ med.name }}</strong> (x{{ med.quantity }})<br>
+              ₹{{ med.price }} each
+            </div>
+            <div>
+              Subtotal: ₹{{ med.subtotal }}<br>
+              <a href="{{ url_for('remove_from_cart', med_id=med.id) }}">❌ Remove</a>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="total">💰 Total: ₹{{ total }}</div>
+
+        <div class="cart-actions">
+          <a href="{{ url_for('checkout') }}"><button>✅ Place Order</button></a>
+        </div>
+      {% else %}
+        <p style="text-align: center;">Your cart is empty.</p>
+      {% endif %}
+
+      <div class="cart-actions">
+        <a href="{{ url_for('home') }}"><button>⬅ Back to Home</button></a>
+      </div>
+    </div>
+  </body>
+</html>
